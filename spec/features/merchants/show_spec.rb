@@ -42,7 +42,6 @@ RSpec.describe 'the merchant show page', type: :feature do
         expect(current_path).to eq("/merchants/#{merchant.id}/invoices")
       end
     end
-
   end
 
   describe "the merchant's top 5 customers" do

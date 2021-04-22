@@ -3,12 +3,12 @@ Rails.application.routes.draw do
 
   root 'merchants#welcome'
   
-  resources :merchants, only: [:index, :show] do
+  resources :merchants, only: [:index] do
     resources :items, shallow: true
   end
  
   get "/merchants/:id/dashboard", to: 'merchants#show'
-  get "/merchants/:id/invoices", to: 'merchants#invoices'
+  get "/merchants/:id/invoices", to: 'merchants#invoice_index'
   get "/merchants/:merchant_id/invoices/:invoice_id", to: 'merchants#invoice_show'
   patch "/merchants/:merchant_id/invoices/:invoice_id", to: 'merchants#update'
 
