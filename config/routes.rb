@@ -1,19 +1,16 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-
-  get '/', to: 'merchants#welcome'
-  get "/merchants", to: 'merchants#index'
-
+  root 'merchants#welcome'
+  
+  resources :merchants, only: [:index, :show] do
+    resources :items, shallow: true
+  end
+ 
   get "/merchants/:id/dashboard", to: 'merchants#show'
-  get "/merchants/:id/items", to: 'merchants#item_index'
-  get "/merchants/:id/invoices", to: 'merchants#invoice_index'
-
-  get "/merchants/:merchant_id/items/:item_id", to: 'merchants#item_show'
+  get "/merchants/:id/invoices", to: 'merchants#invoices'
   get "/merchants/:merchant_id/invoices/:invoice_id", to: 'merchants#invoice_show'
   patch "/merchants/:merchant_id/invoices/:invoice_id", to: 'merchants#update'
-
-########## Admin routes below ############
 
   resources :admin, only: [:index]
   namespace :admin do

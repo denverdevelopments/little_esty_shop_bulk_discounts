@@ -3,28 +3,18 @@ class MerchantsController < ApplicationController
   def welcome
   end
 
-  def show
-    @merchant = Merchant.find(params[:id])
-    @top_five = @merchant.top_five_customers
-    @ship_ready = @merchant.ship_ready
-  end
-
   def index
     @merchants = Merchant.all
   end
 
-  def item_index
+  def show
     @merchant = Merchant.find(params[:id])
-    @items = @merchant.items.all
-  end
-
-  def item_show
-  end
+    @top_five = @merchant.top_five_customers
+  end 
 
   def invoice_index
     @merchant = Merchant.find(params[:id])
     @invoices = @merchant.unique_invoices
-    # @invoices = Invoice.joins(items: :merchant).where('merchants.id = ?', @merchant.id).group(:id)
   end
 
   def invoice_show
@@ -45,7 +35,4 @@ class MerchantsController < ApplicationController
   def invoice_params
     params.permit(:id, :status, :customer_id)
   end
-
-
-
 end
