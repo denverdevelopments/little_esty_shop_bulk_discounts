@@ -18,7 +18,6 @@ RSpec.describe 'admin merchant edit page', type: :feature do
     fill_in "Name", with: "Abraham"
     click_button "Update Merchant"
     expect(current_path).to eq("/admin/merchants/#{merchant1.id}")
-    expect(page).to have_content("Item was successfully updated.")
-
+    expect(page).to have_content("Merchant successfully updated.")
   end
 end

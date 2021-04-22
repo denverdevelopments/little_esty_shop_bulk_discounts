@@ -22,9 +22,9 @@ class Admin::MerchantsController < ApplicationController
   def update
     @merchant.update(merchant_params)
     if params[:status].present?
-      redirect_to "/admin/merchants", notice: "Merchant Successfully Updated"
+      redirect_to "/admin/merchants", notice: "Merchant successfully updated."
     else
-      redirect_to "/admin/merchants/#{@merchant.id}", notice: "Merchant Successfully Updated"
+      redirect_to "/admin/merchants/#{@merchant.id}", notice: "Merchant successfully updated."
     end
   end
 

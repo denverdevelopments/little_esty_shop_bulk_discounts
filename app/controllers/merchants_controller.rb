@@ -10,6 +10,7 @@ class MerchantsController < ApplicationController
   def show
     @merchant = Merchant.find(params[:id])
     @top_five = @merchant.top_five_customers
+    @ship_ready = @merchant.ship_ready
   end 
 
   def invoice_index
