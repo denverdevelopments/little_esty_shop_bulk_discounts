@@ -10,6 +10,7 @@ class MerchantsController < ApplicationController
   def show
     @merchant = Merchant.find(params[:id])
     @top_five = @merchant.top_five_customers
+    @ship_ready = @merchant.ship_ready  ##new
 
   #  @top_five = Merchant.joins(items: :invoice_items).joins(:invoices)#.joins(:customers).joins(:transaction)
   #  @top_five_1 = Merchant.joins(:items).joins(:invoice_items).joins(:invoices).joins(:customers).joins(:transaction).where("id = ?", @merchant)
