@@ -16,13 +16,11 @@ Rails.application.routes.draw do
 
   resources :merchants, only: [:index, :show] do
     resources :items, shallow: true
+    resources :discounts, only: [:index, :show]
   end       #nested  :index,:new,:create
-
+  resources :items, only: [:show, :edit, :update]
 
 ###### Merchant Invoices routes below ######
-
-
-
 
 ########## Admin routes below ##############
 
