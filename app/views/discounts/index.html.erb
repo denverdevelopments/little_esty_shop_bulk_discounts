@@ -1,6 +1,6 @@
 <section id="links">
   <h3 style="text-align:left;">
-      &emsp;<%= link_to "Create New Discount", "/merchants/#{@merchant.id}/discounts/new" %><span style="float:right;"><%= link_to "Merchant Dashboard", "/merchants/#{@merchant.id}" %>&emsp;</span>
+      &emsp;*<%= link_to "Create New Discount", "/merchants/#{@merchant.id}/discounts/new" %><span style="float:right;"><%= link_to "Merchant Dashboard", "/merchants/#{@merchant.id}" %>&emsp;</span>
   </h3>
 </section>
 
@@ -8,8 +8,8 @@
   <h2>Discounts Index</h2>
   <% @discounts.each do |discount| %>
     <div id="discount-<%= discount.id %>">
-      &emsp;Discount _ Percent Off %<%= link_to "#{discount.percent}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>:&emsp;&emsp;Quantity Threshold:&emsp;<%= discount.quantity %> (items max)
-
+      &emsp;Discount _ Percent Off %<%= link_to "#{discount.percent}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>:&emsp;&emsp;Quantity Threshold:&emsp;<%= discount.quantity %> (items max)&emsp;<%= link_to "Delete", "/merchants/#{@merchant.id}/discounts/#{discount.id}", method: :delete %>
+      <br/><br/>
     </div>
   <% end %><br/>
 </section>
