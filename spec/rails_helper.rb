@@ -1,4 +1,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+require 'simplecov'
+SimpleCov.start
+
 require 'spec_helper'
 require 'simplecov'
 SimpleCov.start
@@ -7,6 +10,7 @@ require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -63,6 +67,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+<<<<<<< HEAD
 
   Shoulda::Matchers.configure do |config|
       config.integrate do |with|
@@ -70,4 +75,20 @@ RSpec.configure do |config|
         with.library :rails
       end
     end
+=======
+  config.before :each do
+    mock_repo_name = "Fake Repo Name"
+    mock_repo_contributors = ["fakename1", "fakename2", "fakename3"]
+    allow_any_instance_of(GitHubService).to receive(:repo_name).and_return(mock_repo_name)
+    allow_any_instance_of(GitHubService).to receive(:repo_contributors).and_return(mock_repo_contributors)
+  end
+end
+
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+>>>>>>> bulk
 end

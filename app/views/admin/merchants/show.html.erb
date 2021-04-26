@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="nav-container">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <p class="navbar-text">Admin Dashboard</p>
@@ -15,3 +16,14 @@
   </div>
   <%= link_to 'Update Merchant', edit_admin_merchant_path(@merchant) %>
 </body>
+=======
+<h1>Admin - Merchant <%= @merchant.name %></h1>
+
+<section id="links">
+  <%= render 'partials/admin_links' %>
+</section>
+
+<div>
+  <%= link_to "Update #{@merchant.name}", "/admin/merchants/#{@merchant.id}/edit" %>
+</div>
+>>>>>>> bulk

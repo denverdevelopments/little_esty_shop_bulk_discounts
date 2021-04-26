@@ -1,6 +1,7 @@
 ## Extensions
 
 ### Tier 1 - Least Difficult
+
 ```
 As an admin     
 When I visit an admin invoices index page
@@ -16,6 +17,8 @@ On all pages that list all merchants, invoices, or items
 I see a button to sort the list alphabetically, and I see a button to sort by most recent date.
 When I click these buttons, the list is updated accordingly.
 ```
+
+#### Styling
 
 Implement a consistent look and feel throughout your site with reusable styles.
 
@@ -46,7 +49,7 @@ Greater than, less than, and equal to options for created at and updated at
 
 [Authentication Lesson Plan](https://backend.turing.io/module2/lessons/authentication)
 
-[Authorization Lesson Plan](https://backend.turing.io/module2/lessons/authorization]
+[Authorization Lesson Plan](https://backend.turing.io/module2/lessons/authorization)
 
 [Sessions](https://guides.rubyonrails.org/v5.2/action_controller_overview.html#session)
 

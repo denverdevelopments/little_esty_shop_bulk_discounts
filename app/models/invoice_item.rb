@@ -1,4 +1,5 @@
 class InvoiceItem < ApplicationRecord
+<<<<<<< HEAD
   validates_presence_of :invoice_id,
                         :item_id,
                         :quantity,
@@ -15,3 +16,13 @@ class InvoiceItem < ApplicationRecord
     Invoice.order(created_at: :asc).find(invoice_ids)
   end
 end
+=======
+  validates :quantity, presence: true, numericality: true
+  validates :unit_price, presence: true, numericality: true
+  validates :status, presence: true
+  enum status: [ :packaged, :pending, :shipped ]
+
+  belongs_to :item
+  belongs_to :invoice
+end
+>>>>>>> bulk
