@@ -1,23 +1,12 @@
-<section id="links">
-  <h3 style="text-align:left;">
-      &emsp;<%= link_to "Create New Discount", "/merchants/#{@merchant.id}/discounts/new" %><span style="float:right;"><%= link_to "Merchant Dashboard", "/merchants/#{@merchant.id}" %>&emsp;</span>
-  </h3>
-</section>
+<h3 align="right"><%= render partial: 'partials/merch_header' %>&emsp;</h3>
 
-<section id="disc_index">
-  <h2>Discounts Index</h2>
-  <% @discounts.each do |invoice| %>
-    <div id="discount-<%= discount.id %>">
-      Percent Discount $<%= link_to "#{discount.id}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>
-      Quantity Threshold:&emsp;<%= discount.quantity %>
+<h3>New Discount</h3><br/>
+<%= form_with url:"/merchants/#{@merchant.id}/discounts", method: :post, local: true do |form| %>
+  <%= form.label :percent %>
+  <%= form.number_field :percent %><br/><br/>
 
-    </div>
-  <% end %>
-</section>
+  <%= form.label :quantity %>
+  <%= form.number_field :quantity %><br/><br/>
 
-<section id="holidays">
-  <h2>Upcoming Holidays</h2>
-    <%# @three_holidays.each do |holiday| %>
-    <%# end %>
-
-</section>
+  <%= form.submit 'Create New Discount' %>
+<% end %>

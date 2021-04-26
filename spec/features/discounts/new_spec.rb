@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the create new item form', type: :feature do
+RSpec.describe 'the create new discount form', type: :feature do
   before(:each) do
     @merchant_1 = Merchant.create!(name: "AA")
 
@@ -16,33 +16,35 @@ RSpec.describe 'the create new item form', type: :feature do
   #     expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts")
   # end
 
-  it 'has form to create new item' do
+  it 'has form to create new discount' do
       visit "/merchants/#{@merchant_1.id}/discounts/new"
       # save_and_open_page
-    expect(page).to have_content('New Item')
-    expect(find('form')).to have_content('Percentage')
-    expect(find('form')).to have_content('Max Quantity')
-    expect(page).to have_button("Create Discount")
-      click_on "Create Discount"
-    expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts/")
+    expect(page).to have_content('New Discount')
+    expect(find('form')).to have_content('Percent')
+    expect(find('form')).to have_content('Quantity')
+    expect(page).to have_button("Create New Discount")
+      click_on "Create New Discount"
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts/new")
   end
 
   it "creates a new discount" do
     visit "/merchants/#{@merchant_1.id}/discounts/new"
 
-    fill_in "Percentage", with: 40
-    fill_in "Max Quantity", with: 2
-      click_button "Create Discount"
+    fill_in "Percent", with: 40
+    fill_in "Quantity", with: 2
+      click_button "Create New Discount"
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts")
     expect(page).to have_content(40)
   end
 
-  it 'does not allow creating an incomplete discount' do
-    visit "/admin/merchants/new"
+  describe 'sad path' do
+    it 'does not allow creating an incomplete discount' do
+      visit "/merchants/#{@merchant_1.id}/discounts/new"
 
-    fill_in "Max Quantity", with: 2
-      click_button "Create Merchant"
-    expect(current_path).to eq("/admin/merchants/new")
-    expect(page).to have_content("Please enter percentage & quantity")
+      fill_in "Quantity", with: 2
+        click_button "Create New Discount"
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts/new")
+      expect(page).to have_content("ERROR: Please enter percentage & quantity")
+    end
   end
 end

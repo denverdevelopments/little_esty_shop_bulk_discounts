@@ -25,7 +25,7 @@ class DiscountsController < ApplicationController
     if discount.save
       redirect_to "/merchants/#{@merchant.id}/discounts"
     else
-      flash[:alert] = "ERROR: Discount not created."
+      flash[:alert] = "ERROR: Please enter percentage & quantity"
       redirect_to "/merchants/#{@merchant.id}/discounts/new"
     end
   end
@@ -33,32 +33,31 @@ class DiscountsController < ApplicationController
   def new
     @merchant = Merchant.find(params[:merchant_id])
   end
+# <%= form_with url:"/merchants/#{@merchant.id}/discounts", method: :post, local: true do |form| %>
+
 
   def edit
-    @item = Item.find(params[:id])
-    @merchant = @item.merchant
+    @discount = Discount.find(params[:id])
+    @merchant = @discount.merchant
   end
 
   def update
-    item = Item.find(params[:id])
-    @merchant = item.merchant
-    if params[:name]
-      item.update({
-        name: params[:name],
-        description: params[:description],
-        unit_price: params[:unit_price],
-        able: params[:able]
+    discount = Discount.find(params[:id])
+    @merchant = discount.merchant
+    # if params[:name]
+      discount.update({
+        percent: params[:percent],
+        quantity: params[:quantity]
         })
-    else
-      item.update({able: params[:able]})
-    end
-    if item.save
+    # else
+    #   item.update({able: params[:able]})
+    # end
+    if discount.save
       flash[:notice] = "Item was successfully updated."
-      redirect_to "/merchants/#{@merchant.id}/items"
-      # redirect_to "/merchants/#{@merchant.id}/items/#{item.id}"  #NOW  /items/#{item.id}
+      redirect_to "/merchants/#{@merchant.id}/discounts"
     else
       flash[:alert] = "ERROR: Item not updated."
-      redirect_to "/items/#{item.id}/edit"
+      redirect_to "/merchants/#{@merchant.id}/discounts/#{discount.id}/edit"
     end
   end
 end

@@ -6,13 +6,12 @@
 
 <section id="disc_index">
   <h2>Discounts Index</h2>
-  <% @discounts.each do |invoice| %>
+  <% @discounts.each do |discount| %>
     <div id="discount-<%= discount.id %>">
-      Percent Discount $<%= link_to "#{discount.id}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>
-      Quantity Threshold:&emsp;<%= discount.quantity %>
+      &emsp;Discount _ Percent Off %<%= link_to "#{discount.percent}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>:&emsp;&emsp;Quantity Threshold:&emsp;<%= discount.quantity %> (items max)
 
     </div>
-  <% end %>
+  <% end %><br/>
 </section>
 
 <section id="holidays">
