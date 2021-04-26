@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -17,4 +14,3 @@ tv = Discount.create!(percent: 15, quantity: 3, merchant_id: 1)
 
 promo = Discount.create!(percent: 12, quantity: 10, merchant_id: 2)
 single = Discount.create!(percent: 20, quantity: 1, merchant_id: 2)
->>>>>>> bulk

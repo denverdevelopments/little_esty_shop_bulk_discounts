@@ -1,84 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Little Etsy Shop</title>
+    <title>LittleEtsyShop</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <style>
-    .navbar {
-      margin-bottom: 30px;
-    }
-    .navbar-text {
-      margin-top: 1px;
-      margin-bottom: 1px;
-      font-weight: bold;
-    }
-    .col-sm-5 {
-      background-color:lavender;
-      font-weight: bold;
-      text-align:center;
-      margin-right: 80px
-    }
-    .col-sm-4 {
-      text-align:left;
-      margin-right: 80px;
-      margin-left: 10px
-    }
-    .col-sm-6 {
-      background-color:lavenderblush;
-      font-weight: bold;
-      text-align:center;
-    }
-    .col-12 {
-      background-color:#EBEFF3;
-      font-weight: bold;
-      text-align:center;
-      margin-right: 80px;
-      margin-left: 10px
-    }
-
-    .table {
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-    }
-
-    .td {
-      border: 1px solid #000000;
-      text-align: left;
-      padding: 8px;
-    }
-
-    .th1 {
-      background-color: #8D8F8F;
-      border: 1px solid #dddddd;
-      text-align: center;
-      padding: 4px;
-      color: #ffffff
-    }
-    .th2 {
-      background-color: #dddddd;
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-    }
-    </style>
   </head>
 
   <body>
-<<<<<<< HEAD
-    <div class="top-container">
-      <h1 style="text-align:center; background-color:#EBEFF3;">Little Esty Shop</h1>
-      <% flash.each do |type, notice| %>
-        <h3><b><%= notice %></b></h3>
-      <% end %>
-      <%= yield %>
-
-    </div>
-=======
     <% require './app/services/git_hub_service' %>
     <h1 align="center">Little Esty Shop</h1><br/>
 
@@ -93,14 +24,5 @@
 
     <%= yield %>
 
-    <h4>Git Hub Repository:
-      <% service = GitHubService.new %>
-      <%= service.repo_name %>
-    </h4>
-
-    <h4>Contributors:
-      <%= service.repo_contributors.join(", ") %>
-    </h4>
->>>>>>> bulk
   </body>
 </html>

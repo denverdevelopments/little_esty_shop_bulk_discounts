@@ -1,22 +1,5 @@
 require 'rails_helper'
 
-<<<<<<< HEAD
-describe 'Admin Merchant New' do
-  before :each do
-    @m1 = Merchant.create!(name: 'Merchant 1')
-  end
-  
-  it 'should be able to fill in a form and create a new merchant' do
-    visit new_admin_merchant_path
-
-    fill_in :name, with: 'Dingley Doo'
-
-    click_button
-
-    expect(current_path).to eq(admin_merchants_path)
-    expect(page).to have_content('Dingley Doo')
-    expect(page).to have_content('Merchant Has Been Created!')
-=======
 RSpec.describe 'admin new merchant page', type: :feature do
   it 'shows the new merchant form' do
 
@@ -65,6 +48,5 @@ RSpec.describe 'admin new merchant page', type: :feature do
       expect(current_path).to eq("/admin/merchants/new")
       expect(page).to have_content('Invalid Status')
     end
->>>>>>> bulk
   end
 end

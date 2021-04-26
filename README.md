@@ -1,6 +1,5 @@
+# Little Esty Shop
 
-<<<<<<< HEAD
-=======
 ## Background and Description
 
 "Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
@@ -37,4 +36,3 @@ This project requires Ruby 2.5.3.
 1. [User Stories](./doc/user_stories.md)
 1. [Extensions](./doc/extensions.md)
 1. [Evaluation](./doc/evaluation.md)
->>>>>>> bulk

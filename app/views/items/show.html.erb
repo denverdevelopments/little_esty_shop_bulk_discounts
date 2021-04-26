@@ -1,32 +1,5 @@
-<<<<<<< HEAD
-<div class="nav-container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <p class="navbar-text"><%= @merchant.name %></p>
-    <ul class="nav navbar-nav">
-      <li><%= link_to 'Dashboard', merchant_dashboard_index_path, style: 'pull-right' %>
-      <%= link_to 'My Items', merchant_items_path(@merchant), style: 'pull-right' %>
-      <%= link_to 'My Invoices', merchant_invoices_path(@merchant), style: 'pull-right' %></li>
-    </ul>
-  </nav>
-</div>
-
-<body>
-  <div class="row">
-    <p class='col-12'><%= @item.name %></p>
-  </div>
-
-
-  <p><%= @item.description %></p><br/>
-
-  <p>Price: $<%= @item.unit_price %></p>
-
-  <strong><%= link_to "Update Item", edit_merchant_item_path(@merchant, @item) %></strong>
-
-</body>
-=======
 <h3 align="right"><%= render partial: 'partials/merch_header' %>&emsp;</h3>
 
 <h2><%= @item.name %></h2>
 <h4><%= @item.description %><br/>$<%= @item.unit_price %> per unit</h4>
 <h4><%= link_to "Edit Item", "/items/#{@item.id}/edit" %></h4>
->>>>>>> bulk

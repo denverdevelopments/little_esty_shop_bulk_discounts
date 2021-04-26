@@ -1,19 +1,4 @@
 class Invoice < ApplicationRecord
-<<<<<<< HEAD
-  validates_presence_of :status,
-                        :customer_id
-
-  belongs_to :customer
-  has_many :transactions
-  has_many :invoice_items
-  has_many :items, through: :invoice_items
-  has_many :merchants, through: :items
-
-  enum status: [:cancelled, :in_progress, :complete]
-
-  def total_revenue
-    invoice_items.sum("unit_price * quantity")
-=======
   validates :status, presence: true
   enum status: [ 'in progress', 'cancelled', 'completed' ]
 
@@ -49,6 +34,5 @@ class Invoice < ApplicationRecord
 
   def revenue
     invoice_items.sum("invoice_items.unit_price * invoice_items.quantity")
->>>>>>> bulk
   end
 end

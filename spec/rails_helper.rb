@@ -3,8 +3,6 @@ require 'simplecov'
 SimpleCov.start
 
 require 'spec_helper'
-require 'simplecov'
-SimpleCov.start
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
@@ -67,15 +65,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-<<<<<<< HEAD
-
-  Shoulda::Matchers.configure do |config|
-      config.integrate do |with|
-        with.test_framework :rspec
-        with.library :rails
-      end
-    end
-=======
   config.before :each do
     mock_repo_name = "Fake Repo Name"
     mock_repo_contributors = ["fakename1", "fakename2", "fakename3"]
@@ -90,5 +79,4 @@ Shoulda::Matchers.configure do |config|
     with.test_framework :rspec
     with.library :rails
   end
->>>>>>> bulk
 end
