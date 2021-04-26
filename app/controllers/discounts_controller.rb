@@ -3,7 +3,8 @@ class DiscountsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @discounts = @merchant.discounts
-    
+    @three_holidays = @discounts##
+
     # @merchant = Merchant.find(params[:merchant_id])
     # @enabled_items = Item.all.enabled
     # @disabled_items = Item.all.disabled
@@ -20,12 +21,12 @@ class DiscountsController < ApplicationController
 
   def create
     @merchant = Merchant.find(params[:merchant_id])
-    item = @merchant.items.new({name: params[:name], description: params[:description], unit_price: params[:unit_price], able: params[:able]})
-    if item.save
-      redirect_to "/merchants/#{@merchant.id}/items"
+    discount = @merchant.discounts.new({percent: params[:percent], quantity: params[:quantity]})
+    if discount.save
+      redirect_to "/merchants/#{@merchant.id}/discounts"
     else
-      flash[:alert] = "ERROR: Item not created."
-      redirect_to "/merchants/#{@merchant.id}/items/new"
+      flash[:alert] = "ERROR: Discount not created."
+      redirect_to "/merchants/#{@merchant.id}/discounts/new"
     end
   end
 

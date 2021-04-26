@@ -67,17 +67,9 @@ RSpec.describe 'the merchant discount index', type: :feature do
 
     expect(page).to have_content(@qui.name)
     expect(page).to have_link("Create New Discount")
-    click_link "Create New Discount"
-    # expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts")
-    # expect(page).to have_button("Disable")
-    # expect(page).to_not have_button("Enable")
+      click_link "Create New Discount"
+    expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts/new")
   end
-
-  it "has a link to 'Create NEW Item'" do
-    visit "/merchants/#{@jerde.id}/items"
-      click_on "Create NEW Item"
-    expect(current_path).to eq("/merchants/#{@jerde.id}/items/new")
-  end     #merchant items us#6-1
 
   it "has form to create new item" do
       visit "/merchants/#{@jerde.id}/items/new"
