@@ -13,7 +13,7 @@ RSpec.describe 'the merchant discount show page', type: :feature do
   end
 
   it 'has item name, description, price' do
-    visit "/items/#{@item1.id}"
+    visit "/merchants/#{@merchant_1.id}/dashboard"
 
     expect(page).to have_content(@item1.name)
     expect(page).to have_content(@item1.description)

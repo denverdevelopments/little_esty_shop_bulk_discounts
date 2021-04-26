@@ -1,5 +1,4 @@
 <section id="links">
-  &emsp;<%= link_to "Merchant Index", "/merchants" %>
   &emsp;<%= link_to "Merchant Dashboard", "/merchants/#{@merchant.id}" %>
 </section>
 
@@ -7,8 +6,16 @@
   <h2>Discounts Index</h2>
   <% @discounts.each do |invoice| %>
     <div id="discount-<%= discount.id %>">
-      Discount $<%= link_to "#{discount.id}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>
+      Percent Discount $<%= link_to "#{discount.id}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>
       Quantity Threshold:&emsp;<%= discount.quantity %>
+
     </div>
   <% end %>
+</section>
+
+<section id="disc_index">
+  <h2>Upcoming Holidays</h2>
+    <%# @three_holidays.each do |holiday| %>
+    <%# end %>
+  
 </section>

@@ -31,27 +31,43 @@ RSpec.describe 'the merchant discount index', type: :feature do
     visit "/merchants/#{@merchant_1.id}/discounts"
 
     within "#discount-#{@employee_1.id}" do
-      expect(page).to have_link(@employee_1.percent)
       expect(page).to have_content(@employee_1.quantity)
+      expect(page).to have_link(@employee_1.percent)
+      click_link(@employee_1.percent)
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts/#{@employee_1.id}")
     end
 
     within "#discount-#{@flier_1.id}" do
-      expect(page).to have_link(@flier_1.percent)
       expect(page).to have_content(@flier_1.quantity)
+      expect(page).to have_link(@flier_1.percent)
+      click_link(@flier_1.percent)
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts/#{@flier_1.id}")
     end
 
     within "#discount-#{@tv_1.id}" do
-      expect(page).to have_link(@tv_1.percent)
       expect(page).to have_content(@tv_1.quantity)
+      expect(page).to have_link(@tv_1.percent)
+      click_link(@tv_1.percent)
+      expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts/#{@tv_1.id}")
     end
   end
 
-  it 'has Enable button by Disabled discounts' do
+  describe 'Upcoming Holidays section' do
+    it 'shows section for Upcoming Holidays' do
+      visit "/merchants/#{@merchant_1.id}/discounts"
+
+      expect(page).to have_content("Upcoming Holidays")
+    end
+  end
+
+
+
+  it 'has link to Create New Discount' do
     visit "/merchants/#{@merchant_1.id}/discounts"
 
     expect(page).to have_content(@qui.name)
-    expect(page).to have_button("Enable")
-    # click_button "Enable"
+    expect(page).to have_link("Create New Discount")
+    click_link "Create New Discount"
     # expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts")
     # expect(page).to have_button("Disable")
     # expect(page).to_not have_button("Enable")
@@ -75,33 +91,4 @@ RSpec.describe 'the merchant discount index', type: :feature do
     # expect(current_path).to eq("/merchants/#{@jerde.id}/items")
   end
 
-  describe 'Upcoming Holidays section' do
-    it 'shows section for Upcoming Holidays' do
-      visit "/merchants/#{@merchant_1.id}/discounts"
-
-      expect(page).to have_content("Upcoming Holidays")
-    end
-    #
-    # it 'shows best sale day for Most Popular Items"' do
-    #   visit "/merchants/#{@jerde.id}/items"
-    #
-    #   expect(page).to have_content("Top sales date")
-    # end
-  end
-  # Merchant Items Index: 5 most popular items
-  # As a merchant, When I visit my items index page
-  # Then I see the names of the top 5 most popular items ranked by total revenue generated
-  # And I see that each item name links to my merchant item show page for that item
-  # And I see the total revenue generated next to each item name
-  #
-  # Notes on Revenue Calculation:
-  # - Only invoices with at least one successful transaction should count towards revenue
-  # - Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-  # - Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
-
-  # Merchant Items Index: Top Item's Best Day
-  # When I visit the items index page
-  # Then next to each of the 5 most popular items I see the date with the most sales for each item.
-  # And I see a label “Top selling date for <item name> was <date with most sales>"
-  # Note: use the invoice date. If there are multiple days with equal number of sales, return the most recent day.
 end
