@@ -5,12 +5,14 @@
 }
 </style>
 
+<section id="links">
+  <h3 style="text-align:left;">
+      Merchant:&emsp; <%=  @merchant.name %><span style="float:right;"><%= render partial: 'partials/merch_header' %>&emsp;</span>
+  </h3>
+  <p>&emsp;<%= link_to "click to bulk discounts", "/merchants/#{@merchant.id}/discounts" %></p>
+</section>
 
-<h3 id="links"; style="text-align:left;">
-    Merchant:  &nbsp; <%=  @merchant.name %><span style="float:right;"><%= render partial: 'partials/merch_header' %>&emsp;</span>
-</h3>
-
-<% @merchant.name %><br/>
+<% @merchant.name %>
 
 <div class="row">
   <div class="column">
@@ -21,10 +23,6 @@
       <%= "'s sucessful transations:  " %>
       <%= value %> </p>
     <% end %>
-    </section>
-
-    <section id="bulk_discounts">
-    <h4>&emsp;*<%= link_to "Click to view bulk discounts", "/merchants/#{@merchant.id}/discounts" %></h4>
     </section>
   </div>
 

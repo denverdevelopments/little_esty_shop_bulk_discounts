@@ -1,27 +1,14 @@
-<h1 id="disc_index">Discounts Index</h1>
-
 <section id="links">
-  <%= link_to "Merchants", "/admin/merchants" %>
-  <%= link_to "Invoices", "/admin/invoices" %>
+  &emsp;<%= link_to "Merchant Index", "/merchants" %>
+  &emsp;<%= link_to "Merchant Dashboard", "/merchants/#{@merchant.id}" %>
 </section>
 
-<section id="incomplete_invoices">
-  <h2>Incomplete Invoices</h2>
-  <% @incomplete_invoices.each do |invoice| %>
-    <div id="incomplete_invoice-<%= invoice.id %>">
-      Invoice#<%= link_to "#{invoice.id}", "/admin/invoices/#{invoice.id}" %>
-      <%= invoice.created_at.strftime("%A, %B %d, %Y") %>
-    </div>
-  <% end %>
-</section>
-
-<section id="top_five_customers">
-  <h2>Top Five Customers</h2>
-  <% @top_five_customers.each do |customer| %>
-    <div id="customer-<%= customer.id %>">
-      <%= customer.first_name %>
-      <%= customer.last_name %> -
-      <%= customer.num_transactions %> purchases
+<section id="disc_index">
+  <h2>Discounts Index</h2>
+  <% @discounts.each do |invoice| %>
+    <div id="discount-<%= discount.id %>">
+      Discount $<%= link_to "#{discount.id}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>
+      Quantity Threshold:&emsp;<%= discount.quantity %>
     </div>
   <% end %>
 </section>
