@@ -5,7 +5,6 @@ RSpec.describe 'the create new discount form', type: :feature do
     @merchant_1 = Merchant.create!(name: "AA")
 
     @employee_1 = @merchant_1.discounts.create!(percent: 28, quantity: 5)
-    @flier_1 = @merchant_1.discounts.create!(percent: 10, quantity: 10)
   end
 
   # it 'has a link to merchants discounts index' do
