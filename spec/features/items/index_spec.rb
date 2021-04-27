@@ -14,22 +14,22 @@ RSpec.describe 'the merchant item index', type: :feature do
   it 'has a link to merchants dashboard' do
     visit "/merchants/#{@jerde.id}/items"
       expect(page).to have_link("Dashboard")
-      # click_link("Dashboard")
-      # expect(current_path).to eq("/merchants/#{@jerde.id}/dashboard")
+      click_link("Dashboard")
+      expect(current_path).to eq("/merchants/#{@jerde.id}/dashboard")
   end
 
   it 'has a link to merchant items' do
     visit "/merchants/#{@jerde.id}/items"
       expect(page).to have_link("My Items")
-      # click_link("My Items")
-      # expect(current_path).to eq("/merchants/#{@jerde.id}/items")
+      click_link("My Items")
+      expect(current_path).to eq("/merchants/#{@jerde.id}/items")
   end
 
   it 'has a link to merchant invoices' do
     visit "/merchants/#{@jerde.id}/items"
       expect(page).to have_link("My Invoices")
-      # click_link("My Invoices")
-      # expect(current_path).to eq("/merchants/#{@jerde.id}/invoices")
+      click_link("My Invoices")
+      expect(current_path).to eq("/merchants/#{@jerde.id}/invoices")
   end
 
   it 'lists of the names of all of merchant items' do

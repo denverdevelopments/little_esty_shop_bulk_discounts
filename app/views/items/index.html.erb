@@ -2,7 +2,7 @@
     Merchant: &emsp;<%=  @merchant.name %><span style="float:right;"><%= render partial: 'partials/merch_header' %>&emsp;</span>
 </h3>
 
-<h2 align="center">My Items</h2><br/>
+<h2 align="center">My Items</h2>
 <h5>&emsp;*<%= link_to "Create NEW Item", "/merchants/#{@merchant.id}/items/new" %></h5>
 
 <style>
@@ -15,17 +15,22 @@
 
 <div class="row">
   <div class="column">
+    <section id="enabled_items">
     <h3>Enabled Items</h3>
     <% @enabled_items.each do |item| %>
         <h4>&emsp;<%= link_to "#{item.name}", "/items/#{item.id}" %></h4>
         <%= button_to("Disabled", "/items/#{item.id}", :params => {able: "Disable"}, method: :patch) %>
     <% end %></br>
+    </section>
 
+    <section id="disabled_items">
     <h3>Disabled Items</h3>
     <% @disabled_items.each do |item| %>
         <h4>&emsp;  <%= link_to "#{item.name}", "/items/#{item.id}" %></h4>
         <%= button_to("Enable", "/items/#{item.id}", :params => {able: "Enabled"}, method: :patch) %>
     <% end %>
+    </section>
+
   </div>
 
   <div class="column">
