@@ -10,14 +10,6 @@ RSpec.describe 'the merchant discount index', type: :feature do
     @tv_1 = @merchant_1.discounts.create!(percent: 15, quantity: 3)
     @promo_2 = @merchant_2.discounts.create!(percent: 12, quantity: 10)
     @single_2 = @merchant_2.discounts.create!(percent: 20, quantity: 1)
-
-    # @jerde = Merchant.create!(name: 'Schroeder-Jerde')
-    # @willms = Merchant.create!(name: 'Willms and Sons')
-    # @thiel = Merchant.create!(name: 'Cummings-Thiel')
-    # @qui = @jerde.items.create!(name: 'Qui Esse', description: 'Nihil autem', unit_price: 75107, able: "Disabled")
-    # @autem = @jerde.items.create!(name: 'Autem Minima', description: 'Cumque consequuntur ad', unit_price: 67076, able: "Enabled")
-    # @ea = @jerde.items.create!(name: 'Ea Voluptatum', description: 'Sunt officia', unit_price: 32301, able: "Enabled")
-    # @nemo = @willms.items.create!(name: 'Nemo Facere', description: 'Sunt eum id', unit_price: 4291, able: "Disabled")
   end
 
   it 'has a link to merchants dashboard' do
@@ -81,17 +73,4 @@ RSpec.describe 'the merchant discount index', type: :feature do
       click_link "Create New Discount"
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts/new")
   end
-
-  # it "has form to create new item" do
-  #     visit "/merchants/#{@jerde.id}/items/new"
-  #     # save_and_open_page
-  #   expect(page).to have_content('New Item')
-    # expect(find('form')).to have_content('Name')
-    # expect(find('form')).to have_content('Description')
-    # expect(find('form')).to have_content('Unit price')
-    # expect(page).to have_button("Submit")
-    #   click_on "Submit"
-    # expect(current_path).to eq("/merchants/#{@jerde.id}/items")
-  # end
-
 end
