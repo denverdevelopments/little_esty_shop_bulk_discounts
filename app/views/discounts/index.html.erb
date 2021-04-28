@@ -8,7 +8,7 @@
   <h2>Discounts Index</h2>
   <% @discounts.each do |discount| %>
     <section id="discount-<%= discount.id %>">
-      &emsp;Discount _ Percent Off %<%= link_to "#{discount.percent}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>:&emsp;&emsp;Minimum Quantity Threshold:&emsp;<%= discount.quantity %><%= link_to "Delete", "/merchants/#{@merchant.id}/discounts/#{discount.id}", method: :delete %>
+      &emsp;Link :  <%= link_to "%#{discount.percent} Percent Off", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>&emsp;&emsp;Minimum Quantity Threshold:&emsp;<%= discount.quantity %>:&emsp;<%= link_to "Delete", "/merchants/#{@merchant.id}/discounts/#{discount.id}", method: :delete %>
       <br/><br/>
     </section>
   <% end %><br/>

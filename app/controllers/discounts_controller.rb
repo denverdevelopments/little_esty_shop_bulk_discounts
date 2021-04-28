@@ -45,21 +45,13 @@ class DiscountsController < ApplicationController
   def update
     discount = Discount.find(params[:id])
     @merchant = discount.merchant
-    # if params[:name]
       discount.update({
         percent: params[:percent],
         quantity: params[:quantity]
         })
-    # else
-    #   item.update({able: params[:able]})
-    # end
-    if discount.save
-      flash[:notice] = "Discount was successfully updated."
-      redirect_to "/merchants/#{@merchant.id}/discounts"
-    else
-      flash[:alert] = "ERROR: Discount not updated."
-      redirect_to "/merchants/#{@merchant.id}/discounts/#{discount.id}/edit"
-    end
+    discount.save
+    flash[:notice] = "Discount was successfully updated."
+    redirect_to "/merchants/#{@merchant.id}/discounts/#{discount.id}"
   end
 
   def destroy
