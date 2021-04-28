@@ -20,7 +20,11 @@ class Invoice < ApplicationRecord
     # why does above version .status give a number, andthe one bleow not?
     InvoiceItem.joins(item: :merchant).where(invoice_id: self.id).where('merchants.id = ?', merchant_id)
       .select("invoice_items.*, items.name")
+  end
 
+  def discount_revenue(merchant_id)
+    InvoiceItem.joins(item: :merchant).where(invoice_id: self.id).group(:invoice_id).where('merchants.id = ?', merchant_id)
+        .sum("invoice_items.quantity * invoice_items.unit_price")
   end
 
   def expected_revenue(merchant_id)
