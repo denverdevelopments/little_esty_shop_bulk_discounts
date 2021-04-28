@@ -13,18 +13,18 @@ class MerchantsController < ApplicationController
     @ship_ready = @merchant.ship_ready  ##new
 
   #  @top_five_1 = Merchant.joins(:items).joins(:invoice_items).joins(:invoices).joins(:customers).joins(:transaction).where("id = ?", @merchant)
-  end 
+  end
 
   def invoice_index
     @merchant = Merchant.find(params[:id])
     @invoices = @merchant.unique_invoices
   end
 
-
   def invoice_show
     @merchant = Merchant.find(params[:merchant_id])
     @invoice = Invoice.find(params[:invoice_id])
     @customer = Customer.find(@invoice.customer_id)
+      @discounts = @merchant.discounts  #NEW
     @items = @invoice.invoice_items_info(@merchant.id)
     @total_revenue = @invoice.expected_revenue(@merchant.id)
   end

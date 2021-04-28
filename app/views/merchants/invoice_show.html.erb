@@ -1,29 +1,22 @@
-<%= @invoice.id %> </br>
-<div id="test"><%= @invoice.status %> </div>
+<h2>ID# <%= @invoice.id %> Invoice Show</h2>
 
-  <%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
-    <%= f.label :status %>
-    <%= f.select :status, ['in progress', 'cancelled', 'completed']%>
+<div id="test"><%= @invoice.status %></div><br/>
 
-    <%= f.submit "Update Invoice Status" %>
-  <% end %>
+<%= form_with url: "/merchants/#{@merchant.id}/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
+  <%= f.label :status %>
+  <%= f.select :status, ['in progress', 'cancelled', 'completed']%>
+  <%= f.submit "Update Invoice Status" %>
+<% end %><br/>
 
+Created at:&emsp;<%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </br>
+Customer:&emsp;<%= @customer.first_name %> <%= @customer.last_name %><br/><br/>
 
-
-<%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </br>
-<%= @customer.first_name %> </br>
-<%= @customer.last_name %> </br>
-
-</br></br>
+<h4>Items:</h4>
 <% @items.each do |item| %>
-  <%=  item.name  %> </br>
-  <%=  item.status  %> </br>
-  <%=  item.quantity  %> </br>
-  <%=  item.unit_price  %> </br>
-  </br>
-<%  end  %>
+  Name:&emsp;<%=  item.name  %> <br/>
+  Status:&emsp;<%=  item.status  %> <br/>
+  Quantity:&emsp;<%=  item.quantity  %> <br/>
+  Unit Price:&emsp; $ <%=  item.unit_price  %> <br/><br/>
+  <%  end  %><br/><br/>
 
-</br></br>
-
-
-<%=  @total_revenue[@invoice.id]  %></br>
+Total Revenue:&emsp; $ <%=  @total_revenue[@invoice.id]  %></br>

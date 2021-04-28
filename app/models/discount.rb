@@ -4,10 +4,6 @@ class Discount < ApplicationRecord
 
   belongs_to :merchant
 
-  # def self.disabled
-  #   where(able: "Disabled")
-  # end
-  #
   # def self.enabled
   #   where(able: "Enabled")
   # end

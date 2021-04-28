@@ -17,7 +17,7 @@ class Invoice < ApplicationRecord
 
   def invoice_items_info(merchant_id)
     #  self.items.select("items.name, invoice_items.*")
-    # why does above version .status give a number, andthe one bleow not?
+    # why does above version .status give a number, and the one below not?
     InvoiceItem.joins(item: :merchant).where(invoice_id: self.id).where('merchants.id = ?', merchant_id)
       .select("invoice_items.*, items.name")
   end
