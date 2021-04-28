@@ -11,12 +11,20 @@
 Created at:&emsp;<%= @invoice.created_at.strftime("%A, %B %d, %Y") %> </br>
 Customer:&emsp;<%= @customer.first_name %> <%= @customer.last_name %><br/><br/>
 
+
 <h4>Items:</h4>
 <% @items.each do |item| %>
   Name:&emsp;<%=  item.name  %> <br/>
   Status:&emsp;<%=  item.status  %> <br/>
   Quantity:&emsp;<%=  item.quantity  %> <br/>
   Unit Price:&emsp; $ <%=  item.unit_price  %> <br/><br/>
-  <%  end  %><br/><br/>
+
+  <% if @discounts.present? %>
+    &emsp;<%= link_to "Bulk Discount Applied (if any)", "/merchants/#{@merchant.id}/discounts" %><br/><br/>
+  <% else %>
+    No Discount Available<br/><br/>
+  <% end %>
+
+<%  end  %><br/><br/>
 
 Total Revenue:&emsp; $ <%=  @total_revenue[@invoice.id]  %></br>
