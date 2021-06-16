@@ -1,6 +1,7 @@
-<h2>Bulk Discount Show</h2>
-<h3 align="right"><%= render partial: 'partials/merch_header' %>&emsp;</h3>
+<h2>Bulk Discount:  %<%= @discount.percent %></h2>
+<h3 align="right"><%= render partial: 'partials/merch_header' %></h3>
 
+<p>&emsp;Merchant ID# <%= @merchant.id %></p>
 <p>&emsp;Percent Off  % <%= @discount.percent %></p>
 <p>&emsp;Minimum Quantity:  <%= @discount.quantity %> (item threshold)</p>
-<p>&emsp;<%= link_to "Edit Discount", "/merchants/#{@merchant.id}/discounts/#{@discount.id}/edit" %></p>
+<p>&emsp;&emsp;&emsp;*<%= link_to "Edit Discount", "/merchants/#{@merchant.id}/discounts/#{@discount.id}/edit" %></p>

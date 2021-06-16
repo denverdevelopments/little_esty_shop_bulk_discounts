@@ -15,8 +15,14 @@
 </section>
 
 <section id="holidays">
-  <h2>Upcoming Holidays</h2>
-    <%# @three_holidays.each do |holiday| %>
-    <%# end %>
+  <h4>Upcoming Holidays:</h4>
+    <% require "./app/services/nager_service" %>
+    <% service = NagerService.new %>
+    <% service.three_holidays.each do |holiday| %>
+    <% end %>
+
+  <% @next_holidays.each do |holiday| %>
+    <p>&emsp;<%= holiday.name %>&emsp;&emsp;<%= holiday.date %></p>
+  <% end %>
 
 </section>

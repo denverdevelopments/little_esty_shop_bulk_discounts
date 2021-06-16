@@ -35,7 +35,9 @@ class Invoice < ApplicationRecord
     invoice_items.sum("invoice_items.unit_price * invoice_items.quantity")
   end
 
-  def use_discount  ##apply discount_used
-    # def discount-expected_revenue(merchant_id)
+  def apply_bulk_discounts
+    invoice_items.sum do |invoice_item|
+      invoice_item.revenue
+    end
   end
 end

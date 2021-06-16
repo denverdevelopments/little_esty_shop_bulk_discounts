@@ -3,7 +3,11 @@ class DiscountsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @discounts = @merchant.discounts
-    ## @three_holidays =
+
+    json = NagerService.new.three_holidays
+    @next_holidays = json.map do |holiday|
+      Holiday.new(holiday)
+    end
   end
 
   def show

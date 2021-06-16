@@ -10,13 +10,14 @@ class GitHubService
   end
 
   def repo_name
-    resp = conn.get('/repos/A-McGuire/little-esty-shop')
+    resp = conn.get('/repos/denverdevelopments/little-esty-shop')
     json = JSON.parse(resp.body, symbolize_names: true)
     json[:name]
   end
 
   def repo_contributors
-    resp = conn.get('/repos/A-McGuire/little-esty-shop/contributors')
+    # resp = conn.get('/repos/A-M/little-esty-shop/contributors')
+    resp = conn.get('/repos/denverdevelopments/little-esty-shop/contributors')
     json = JSON.parse(resp.body, symbolize_names: true)
     var = json.map do |user|
       user[:login]

@@ -7,7 +7,8 @@ RSpec.describe 'the merchant discount show page', type: :feature do
 
     visit "/merchants/#{merchant_1.id}/discounts/#{discount_1.id}"
 
-    expect(page).to have_content("Bulk Discount Show")
+    expect(page).to have_content("Bulk Discount")
+    expect(page).to have_content(merchant_1.id)
     expect(page).to have_content(discount_1.percent)
     expect(page).to have_content(discount_1.quantity)
     expect(page).to have_link("Edit Discount")
