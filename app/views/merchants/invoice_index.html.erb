@@ -1,8 +1,5 @@
+<h2>Merchant Invoice Index</h2>
 
 <% @invoices.each do |invoice| %>
-  </br>
-  <%= link_to "#{invoice.id}.", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %>
-
+  <p>&emsp;Invoice #:  <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></p>
 <% end %>
-
-</br>

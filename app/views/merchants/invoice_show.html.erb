@@ -14,10 +14,10 @@ Customer:&emsp;<%= @customer.first_name %> <%= @customer.last_name %><br/><br/>
 <section>
   <% @invoice.invoice_items.each do |invoice_item| %>
     <section id="invoice_item-<%= invoice_item.id %>">
-      Invoice Item #ID: <%= invoice_item.id %><br/>
-      <% if invoice_item.discount_used.present? %>
-        <%= link_to "Discount", "/merchants/#{invoice_item.merchant.id}/bulk_discounts/#{invoice_item.best_discount.id}" %>: 
-        <%= number_to_percentage(invoice_item.best_discount.discount * 100) %><br><br>
+      Invoice Item ID: <%= invoice_item.id %><br>
+      <% if invoice_item.best_discount.present? %>
+        &emsp;<%= link_to "Best Discount", "/merchants/#{invoice_item.merchant.id}/discounts/#{invoice_item.best_discount.id}" %>:&emsp;%
+        <%= invoice_item.best_discount.percent %><br><br>
       <% else %>
         No Discount Applied<br><br>
       <% end %>
@@ -25,19 +25,15 @@ Customer:&emsp;<%= @customer.first_name %> <%= @customer.last_name %><br/><br/>
   <% end %>
 </section><br>
 
-<h4>Items:</h4>
-<% @items.each do |item| %>
-  Name:&emsp;<%=  item.name  %> <br/>
-  Status:&emsp;<%=  item.status  %> <br/>
-  Quantity:&emsp;<%=  item.quantity  %> <br/>
-  Unit Price:&emsp; $ <%=  item.unit_price  %> <br/><br/>
-
-  <% if @discounts.present? %>
-    &emsp;<%= link_to "Bulk Discount Applied (if any)", "/merchants/#{@merchant.id}/discounts" %><br/><br/>
-  <% else %>
-    No Discount Available<br/><br/>
+<section>
+  <% @items.each do |item| %>
+    Item: <%= item.name %><br>
+    Status: <%= item.status %><br>
+    Quantity: <%= item.quantity %><br>
+    Unit Pice: <%= item.unit_price %><br><br>
   <% end %>
+</section><br>
 
-<%  end  %><br/><br/>
-
-Total Revenue:&emsp; $ <%=  @total_revenue[@invoice.id]  %></br>
+<section>
+  Total Revenue: $<%= @total_revenue %></br>
+</section>

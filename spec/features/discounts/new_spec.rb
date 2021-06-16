@@ -7,13 +7,6 @@ RSpec.describe 'the create new discount form', type: :feature do
     @employee_1 = @merchant_1.discounts.create!(percent: 28, quantity: 5)
   end
 
-  # it 'has a link to merchants discounts index' do
-  #   visit "/merchants/#{@merchant_1.id}/discounts"
-  #     expect(page).to have_link("Merchant Discounts")
-  #     click_link("Merchant Discounts")
-  #     expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts")
-  # end
-
   it 'has form to create new discount' do
       visit "/merchants/#{@merchant_1.id}/discounts/new"
       # save_and_open_page

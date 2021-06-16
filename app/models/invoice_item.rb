@@ -10,17 +10,17 @@ class InvoiceItem < ApplicationRecord
   has_one :merchant, through: :item
   has_many :discounts, through: :merchant
 
- def discount_used
-   discounts.where("quantity <= ?", self.quantity)
-            .order(:discount).last
- end
-
- def discounted_revenue
-  if discount_used.present?
-     (1 - discount_used.percent) * quantity * unit_price
-  else
-    quantity * unit_price
+  def best_discount
+    discounts.order(:percent)
+    .where("quantity <= ?", self.quantity)
+    .last
   end
-end
 
+  def revenue
+    if best_discount.present?
+      quantity * unit_price * (100 - best_discount.percent) / 100
+    else
+      quantity * unit_price
+    end
+  end
 end

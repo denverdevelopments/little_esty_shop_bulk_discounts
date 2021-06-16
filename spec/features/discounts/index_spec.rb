@@ -10,6 +10,7 @@ RSpec.describe 'the merchant discount index', type: :feature do
     @tv_1 = @merchant_1.discounts.create!(percent: 15, quantity: 3)
     @promo_2 = @merchant_2.discounts.create!(percent: 12, quantity: 10)
     @single_2 = @merchant_2.discounts.create!(percent: 20, quantity: 1)
+    @json = NagerService.new.three_holidays
   end
 
   it 'has a link to merchants dashboard' do
@@ -48,21 +49,16 @@ RSpec.describe 'the merchant discount index', type: :feature do
   it 'has link to delete merchant discount' do
     visit "/merchants/#{@merchant_1.id}/discounts"
 
-    within("#discount-#{@employee_1.id}") do
-      expect(page).to have_content(@employee_1.quantity)
-      expect(page).to have_link(@employee_1.percent)
-        click_link("Delete")
-      expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts")
-      # expect(page).to_not have_content(@employee_1.quantity)
-      # expect(page).to_not have_link(@employee_1.percent)
-    end
-  end
+    within("#discount-index") do
+      within("#discount-#{@employee_1.id}") do
+        expect(page).to have_content(@employee_1.quantity)
+        expect(page).to have_link(@employee_1.percent)
+          click_link("Delete")
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts")
+      end
 
-  describe 'Upcoming Holidays section' do
-    it 'shows section for Upcoming Holidays' do
       visit "/merchants/#{@merchant_1.id}/discounts"
-
-      expect(page).to have_content("Upcoming Holidays")
+      expect(page).to_not have_link("%#{@employee_1.percent}")
     end
   end
 
@@ -72,5 +68,18 @@ RSpec.describe 'the merchant discount index', type: :feature do
     expect(page).to have_link("Create New Discount")
       click_link "Create New Discount"
     expect(current_path).to eq("/merchants/#{@merchant_1.id}/discounts/new")
+  end
+
+  describe 'Upcoming Holidays section' do
+    it 'shows section for Upcoming Holidays' do
+      visit "/merchants/#{@merchant_1.id}/discounts"
+
+      within("#holidays") do
+        expect(page).to have_content("Upcoming Holidays")
+        expect(page).to have_content(@json[0][:name])
+        expect(page).to have_content(@json[1][:name])
+        expect(page).to have_content(@json[2][:name])
+      end
+    end
   end
 end

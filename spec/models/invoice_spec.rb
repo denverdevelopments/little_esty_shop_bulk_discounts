@@ -120,5 +120,111 @@ RSpec.describe Invoice do
 
       expect(invoice1.revenue).to eq(55)
     end
+
+    describe 'apply_bulk_discount' do
+      it 'applies a bulk discount to eligible invoice items' do
+        merchant = Merchant.create!(name: "mel")
+        merchant.discounts.create!(quantity: 10, percent: 10)
+        merchant.discounts.create!(quantity: 20, percent: 20)
+        merchant.discounts.create!(quantity: 30, percent: 30)
+        customer = Customer.create!(first_name: "Abe", last_name: "Oldman")
+
+        item1 = merchant.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        item2 = merchant.items.create!(name: "thing2", description: "2thingy", unit_price: 15)
+        invoice1 = customer.invoices.create!(status: 0)
+
+        invoice_item1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 20, unit_price: 5, status: 2) #100 #80
+        invoice_item2 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 2, unit_price: 5, status: 0) #10
+        invoice_item3 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 40, unit_price: 5, status: 0) #200 # 140
+
+        expect(invoice1.apply_bulk_discounts).to eq(230)
+      end
+
+      it 'passes example 1' do
+        merchant = Merchant.create!(name: "mel")
+        merchant.discounts.create!(quantity: 10, percent: 20)
+        customer = Customer.create!(first_name: "Abe", last_name: "Oldman")
+
+        item1 = merchant.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        item2 = merchant.items.create!(name: "thing2", description: "2thingy", unit_price: 15)
+
+        invoice1 = customer.invoices.create!(status: 0)
+
+        invoice_item1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 5, unit_price: 5, status: 2) #25
+        invoice_item2 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 5, unit_price: 5, status: 0) #25
+
+        expect(invoice1.apply_bulk_discounts).to eq(50)
+      end
+
+      it 'passes example 2' do
+        merchant = Merchant.create!(name: "mel")
+        merchant.discounts.create!(quantity: 10, percent: 20)
+        customer = Customer.create!(first_name: "Abe", last_name: "Oldman")
+
+        item1 = merchant.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        item2 = merchant.items.create!(name: "thing2", description: "2thingy", unit_price: 15)
+
+        invoice1 = customer.invoices.create!(status: 0)
+
+        invoice_item1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 10, unit_price: 5, status: 2) #40
+        invoice_item2 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 5, unit_price: 5, status: 0) #25
+
+        expect(invoice1.apply_bulk_discounts).to eq(65)
+      end
+
+      it 'passes example 3' do
+        merchant = Merchant.create!(name: "mel")
+        merchant.discounts.create!(quantity: 10, percent: 20)
+        merchant.discounts.create!(quantity: 15, percent: 30)
+        customer = Customer.create!(first_name: "Abe", last_name: "Oldman")
+
+        item1 = merchant.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        item2 = merchant.items.create!(name: "thing2", description: "2thingy", unit_price: 15)
+
+        invoice1 = customer.invoices.create!(status: 0)
+
+        invoice_item1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 12, unit_price: 5, status: 2) #60 => 48
+        invoice_item2 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 15, unit_price: 5, status: 0) #75 => 52.5
+
+        expect(invoice1.apply_bulk_discounts).to eq(100)  #100.5
+      end
+
+      it 'passes example 4' do
+        merchant = Merchant.create!(name: "mel")
+        merchant.discounts.create!(quantity: 10, percent: 20)
+        merchant.discounts.create!(quantity: 15, percent: 15)
+        customer = Customer.create!(first_name: "Abe", last_name: "Oldman")
+
+        item1 = merchant.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        item2 = merchant.items.create!(name: "thing2", description: "2thingy", unit_price: 15)
+
+        invoice1 = customer.invoices.create!(status: 0)
+
+        invoice_item1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 12, unit_price: 5, status: 2) #60 => 48
+        invoice_item2 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 15, unit_price: 5, status: 0) #75 => 60
+
+        expect(invoice1.apply_bulk_discounts).to eq(108)
+      end
+
+      it 'passes exmaple 5' do
+        merchant1 = Merchant.create!(name: "mel")
+        merchant2 = Merchant.create!(name: "bel")
+        merchant1.discounts.create!(quantity: 10, percent: 20)
+        merchant1.discounts.create!(quantity: 15, percent: 30)
+        customer = Customer.create!(first_name: "Abe", last_name: "Oldman")
+
+        item1 = merchant1.items.create!(name: "thing", description: "thingy", unit_price: 10)
+        item2 = merchant1.items.create!(name: "thing2", description: "2thingy", unit_price: 15)
+        item3 = merchant2.items.create!(name: "thing2", description: "2thingy", unit_price: 15)
+
+        invoice1 = customer.invoices.create!(status: 0)
+
+        invoice_item1 = InvoiceItem.create!(item: item1, invoice: invoice1, quantity: 12, unit_price: 5, status: 2) #60 => 48
+        invoice_item2 = InvoiceItem.create!(item: item2, invoice: invoice1, quantity: 15, unit_price: 5, status: 0) #75 => 52.5
+        invoice_item2 = InvoiceItem.create!(item: item3, invoice: invoice1, quantity: 15, unit_price: 5, status: 0) #75 => 75
+
+        expect(invoice1.apply_bulk_discounts).to eq(175)  #175.5
+      end
+    end
   end
 end
