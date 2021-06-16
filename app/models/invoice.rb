@@ -22,11 +22,6 @@ class Invoice < ApplicationRecord
       .select("invoice_items.*, items.name")
   end
 
-  def discount_revenue(merchant_id) ##NEW
-    InvoiceItem.joins(item: :merchant).where(invoice_id: self.id).group(:invoice_id).where('merchants.id = ?', merchant_id)
-        .sum("invoice_items.quantity * invoice_items.unit_price")
-  end
-
   def expected_revenue(merchant_id)
     InvoiceItem.joins(item: :merchant).where(invoice_id: self.id).group(:invoice_id).where('merchants.id = ?', merchant_id)
         .sum("invoice_items.quantity * invoice_items.unit_price")
@@ -40,4 +35,7 @@ class Invoice < ApplicationRecord
     invoice_items.sum("invoice_items.unit_price * invoice_items.quantity")
   end
 
+  def use_discount  ##apply discount_used
+    # def discount-expected_revenue(merchant_id)
+  end
 end

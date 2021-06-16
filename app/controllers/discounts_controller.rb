@@ -34,18 +34,15 @@ class DiscountsController < ApplicationController
   def update
     discount = Discount.find(params[:id])
     @merchant = discount.merchant
-      discount.update({
-        percent: params[:percent],
-        quantity: params[:quantity]
-        })
-    discount.save
+    discount.update!({
+      percent: params[:percent],
+      quantity: params[:quantity]
+      })
     flash[:notice] = "Discount was successfully updated."
     redirect_to "/merchants/#{@merchant.id}/discounts/#{discount.id}"
   end
 
   def destroy
-
-    # Discount.find(params[:id]).destroy
     discount = Discount.find(params[:id])
     merchant = discount.merchant
     discount.destroy
